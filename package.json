@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "http-server & wait-on http://localhost:8080 && cypress run; kill -9 $!",
-    "without-backgrounding": "",
-    "without-semi": "http-server & wait-on http://localhost:8080 && cypress run kill $!",
-    "without-and-and": ""
+    "test": "http-server & wait-on http://localhost:8080 && cypress run; kill $!",
+    "without-backgrounding": "http-server; wait-on http://localhost:8080 && cypress run; kill $!",
+    "simulate-server-crash": "http-server & kill $!; wait-on http://localhost:8080 -t 10000; cypress run;"
   },
-  "author": "",
+  "author": "Danny Michaelis",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^3.4.1",
