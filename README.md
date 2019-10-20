@@ -1,3 +1,5 @@
+![Travis (.com)](https://img.shields.io/travis/easilyBaffled/and-and-and-and?style=for-the-badge)
+
 # & and && and ;
 > Bash and Regex are everywhere, and they are not going away, might as well learn them.
 
@@ -37,3 +39,6 @@ Before diving into the Bash syntax, let’s get the Node modules out of the way.
 `kill`  kills a process with a given process Id.
 
 `$1` is a special character that holds the process Id of the most recently backgrounded process. For us, that is our server. So when tied with `kill`, it kills the backgrounded server _after_ the tests have finished.
+
+## Wrap up 
+Now that you understand a little more about Bash, there are tools like  [start-server-and-test](https://github.com/bahmutov/start-server-and-test)  and [concurrently  -  npm](https://www.npmjs.com/package/concurrently) that can simplify this sort of work, so you don’t need `&`, `&&`, `;`. I’m still getting a solid grip on these things, so if you have caught something that I missed or have additional examples/usage please leave a comment. I’d love to get better at this. 
