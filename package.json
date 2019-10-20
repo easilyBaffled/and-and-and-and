@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "http-server & wait-on http://localhost:8080 && cypress run; kill $1",
+    "test": "http-server & wait-on http://localhost:8080 && cypress run; kill -9 $!",
     "without-backgrounding": "",
-    "without-semi": "",
+    "without-semi": "http-server & wait-on http://localhost:8080 && cypress run kill $!",
     "without-and-and": ""
   },
   "author": "",
