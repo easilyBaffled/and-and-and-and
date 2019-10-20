@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "http-server & wait-on http://localhost:8080 && cypress run; kill $1"
+    "test": "http-server & wait-on http://localhost:8080 && cypress run; kill $1",
+    "without-backgrounding": "",
+    "without-semi": "",
+    "without-and-and": ""
   },
   "author": "",
   "license": "ISC",
