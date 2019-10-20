@@ -1,5 +1,4 @@
 ![Travis (.com)](https://img.shields.io/travis/easilyBaffled/and-and-and-and?style=for-the-badge)
-
 # & and && and ;
 > Bash and Regex are everywhere, and they are not going away, might as well learn them.
 
@@ -16,6 +15,7 @@ For educational purposes, we’ll be using
 ```bash
 > http-server & wait-on http://localhost:8080 && cypress run; kill $!
 ```
+If you’d like to follow along I have working examples in [easilyBaffled/and-and-and-and](https://github.com/easilyBaffled/and-and-and-and) and running on [Travis CI](https://travis-ci.org/easilyBaffled/and-and-and-and).
 
 TL;DR: Skip to **Bash Connections**
 Real TL;DR: go to [explainshell.com](https://explainshell.com/explain?cmd=http-server+%26+wait-on+http%3A%2F%2Flocalhost%3A8080+%26%26+cypress+run%3B+kill+%24%21)
