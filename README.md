@@ -1,6 +1,6 @@
 # Just a little Bash, & and && and More!
 
-I was setting up continuous integration for a project and once again found myself copy-and-pasting command like code that I didn't quite grasp. This time it came from [Cypress.io](https://docs.cypress.io/guides/guides/continuous-integration.html#Solutions) to run integration tests on a remote server:
+I was setting up continuous integration for a project and once again found myself copy-and-pasting command line code that I didn't quite grasp. This time it came from [Cypress.io](https://docs.cypress.io/guides/guides/continuous-integration.html#Solutions) to run integration tests on a remote server:
 
 ```bash
 > npm start & wait-on http://localhost:8080
@@ -22,7 +22,7 @@ Before diving into the harder Bash syntax, let's get the Node modules out of the
 
 ## Node Processes 
 
-`http-server` is an NPM module that serves a tiny web app out of the box. Once the server starts, it continually runs on the thread, blocking any other work. If you’re working locally, that isn’t an issue because you could open a new tab in the terminal, but the goal here is to run this and our tests on a remote CI server.
+`http-server` is an NPM module that serves a tiny web app out of the box. Once the server starts, it continually runs on the thread, blocking any other work. If you’re working locally, that isn’t an issue because you can open a new tab in the terminal, but the goal here is to run this and our tests on a remote CI server.
 
 `wait-on http://localhost:8080` stalls the thread while `http-server` prepares and serves the page. Our server isn't going to give us a programmatic indication that the page is ready, so if we don't pause here, our tests would run too early and fail.
 
@@ -31,7 +31,7 @@ Before diving into the harder Bash syntax, let's get the Node modules out of the
 ## Bash Connections
 ### &
 
-`&`  executes the command on the left-hand side in the background. By running `http-server &`, the server will no longer block the thread. It is similar to running `http-server` and everything else in separate terminal tabs.
+`&`  executes the command on the left-hand side in the background. By running `http-server &`, the server will no longer block the thread.
 
 🤔 _There are plenty of other uses for backgrounding tasks. For example: `eslint ./src/* & npm run test`. In this case, linting and testing can be done in parallel to save some time. But that's not the whole story; we'll check in on this again a little later._
 
@@ -60,11 +60,11 @@ Before diving into the harder Bash syntax, let's get the Node modules out of the
 ### $!
 `$!` is a special character that holds the process Id of the most recently backgrounded process. For us, that is our server. So when tied with `kill`, it kills the backgrounded server _after_ the tests have finished.
 
-🤔 _There was a problem with the `eslint ./src/* & npm run test` example from before. Like with `http-server &`, there’s no way to know if it passed or failed. So we could end up with a false positive, where the tests pass but the linting fails. We can fix this with `&& wait $!`. `&&` ensures that we only check the linting results if our tests fail. `wait` is a Bash command that waits for a given process do finish and return the process’s exit code. When paired with `$!`, it will wait for the backgrounded tasks and (provided it can finish) returns the exit code._
+🤔 _There was a problem with the `eslint ./src/* & npm run test` example from before. Like with `http-server &`, there’s no way to know if `eslint` passed or failed. So we could end up with a false positive, where the tests pass but the linting fails. We can fix this with `&& wait $!`. `&&` ensures that we only check the linting results if our tests passed. `wait` is a Bash command that waits for a given process do finish and return the process’s exit code. When paired with `$!`, it will wait for the backgrounded tasks and (provided it can finish) returns the exit code._
 
 
 ## Wrap up 
-Now that you understand a little more about Bash, there are tools like [start-server-and-test](https://github.com/bahmutov/start-server-and-test)  and [concurrently](https://www.npmjs.com/package/concurrently) that can simplify this sort of work, so you don't need `&`, `&&`, `;` 🙃. I'm still learning these things, so if you have caught something that I missed or have additional examples/usage, please leave a comment. I'd love to learn more. 
+There are NPM modules like [start-server-and-test](https://github.com/bahmutov/start-server-and-test)  and [concurrently](https://www.npmjs.com/package/concurrently) that can simplify this sort of work, so you don't need `&`, `&&`, `;`, but it's always nice to know a little more about another language. I'm still learning these things, so if you have caught something that I missed or have additional examples/usage, please leave a comment. I'd love to learn more. 
 
 ---
 Thank you to all of my editors, Debbie, Ville, Justin, and Julian.
