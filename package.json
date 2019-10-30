@@ -4,14 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint node_modules/eslint/lib/",
+    "backgrounding-lint-example": "npm run lint & npm run test && wait $!",
     "test": "http-server & wait-on http://localhost:8080 && cypress run; kill $!",
     "without-backgrounding": "http-server; wait-on http://localhost:8080 && cypress run; kill $!",
-    "simulate-server-crash": "http-server & kill $!; wait-on http://localhost:8080 -t 10000; cypress run;"
+    "simulate-server-crash-with-semi": "http-server & kill $!; wait-on http://localhost:8080 -t 10000; cypress run;",
+    "simulate-server-crash-with-and": "http-server & kill $!; wait-on http://localhost:8080 -t 10000 && cypress run;"
   },
   "author": "Danny Michaelis",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^3.4.1",
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "http-server": "^0.11.1",
     "wait-on": "^3.3.0"
   },
